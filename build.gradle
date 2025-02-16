@@ -1,0 +1,40 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'java'
+}
+
+group = 'io.github.pragwl'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+application {
+    mainClass = 'io.github.pragwl.Application'  // Replace with your main class
+}
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.0'
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': application.mainClass
+    }
+}
+
+shadowJar {
+    archiveBaseName.set("cred-vault")
+    archiveClassifier.set("")
+    archiveVersion.set("")
+}
